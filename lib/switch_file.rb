@@ -10,18 +10,18 @@ require "switch_file/version"
 
 module SwitchFile
   def self.config_path
-    @config_path || (Pow(Dir.pwd) / '.switch_file')
+    @config_path ||= (Pow(Dir.pwd) / '.switch_file')
   end
 
   def self.config_path=(value)
     @config_path = value && Pow(value)
   end
 
-  def self.file_type_attributes=(attributes_array)
-    @file_type_attributes = attributes_array
+  def self.file_type_attributes
+    @file_type_attributes ||= eval(config_path.read)
   end
 
-  def self.file_type_attributes
-    @file_type_attributes || eval(config_path.read)
+  def self.file_type_attributes=(attributes_array)
+    @file_type_attributes = attributes_array
   end
 end

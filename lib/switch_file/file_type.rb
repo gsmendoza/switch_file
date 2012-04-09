@@ -6,7 +6,7 @@ module SwitchFile
     has_value :shortcut
 
     def self.all
-      @all || SwitchFile.file_type_attributes.map{|attributes| FileType.new(attributes) }
+      @all ||= SwitchFile.file_type_attributes.map{|attributes| FileType.new(attributes) }
     end
 
     def self.all=(file_types)
