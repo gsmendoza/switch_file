@@ -1,3 +1,4 @@
+require 'pry'
 require 'switch_file'
 
 RSpec.configure do |config|
