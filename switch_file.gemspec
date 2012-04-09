@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = SwitchFile::VERSION
   s.authors     = ["George Mendoza"]
   s.email       = ["gsmendoza@gmail.com"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.homepage    = "https://github.com/gsmendoza/switch_file"
+  s.summary     = "A configurable utility for jumping across files"
+  s.description = "A configurable utility for jumping across files"
 
   s.rubyforge_project = "switch_file"
 
