@@ -1,9 +1,13 @@
 [
   {
     shortcut: :s,
+    open_command: lambda {|class_name| "echo spec/lib/#{class_name}_spec.rb > tmp/result.txt"},
+    path_regex: %r{spec/fixtures/project/spec/lib/(.*)_spec.rb}
   },
 
   {
     shortcut: :l,
+    open_command: lambda {|class_name| "echo lib/#{class_name}_spec.rb > tmp/result.txt"},
+    path_regex: %r{spec/fixtures/project/lib/(.*).rb}
   }
 ]

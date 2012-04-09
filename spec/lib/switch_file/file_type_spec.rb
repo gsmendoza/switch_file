@@ -17,4 +17,19 @@ describe SwitchFile::FileType do
       FileType.all[0].shortcut.should == :s
     end
   end
+
+  describe "#generate_open_command" do
+    it "should return the command for opening the desired file type of the source_path" do
+      spec_file_type = FileType.new(open_command: lambda{|class_name|
+        "geany spec/lib/#{class_name}_spec.rb"
+      })
+
+      lib_file_type = FileType.new(path_regex: %r{lib/(.*).rb$})
+
+      FileType.all = [lib_file_type, spec_file_type]
+
+      command = spec_file_type.generate_open_command(SourcePath.new(value: '/home/user/project/lib/project/some_class.rb'))
+      command.should == "geany spec/lib/project/some_class_spec.rb"
+    end
+  end
 end
