@@ -1,0 +1,9 @@
+[
+  {
+    shortcut: :s,
+  },
+
+  {
+    shortcut: :l,
+  }
+]

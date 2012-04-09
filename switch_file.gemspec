@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'pow'
   s.add_runtime_dependency 'thor'
+  s.add_runtime_dependency 'valuable'
 
   s.add_development_dependency "guard"
   s.add_development_dependency "guard-rspec"
