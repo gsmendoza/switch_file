@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'switch_file'
+
+SwitchFile::App.start

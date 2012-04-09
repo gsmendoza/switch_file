@@ -1,5 +1,7 @@
-require "switch_file/version"
+require 'pow'
+require 'thor'
 
-module SwitchFile
-  # Your code goes here...
-end
+require "switch_file/version"
+require 'switch_file/app'
+
+
