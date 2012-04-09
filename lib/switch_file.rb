@@ -14,7 +14,7 @@ module SwitchFile
   end
 
   def self.config_path=(value)
-    @config_path = value
+    @config_path = value && Pow(value)
   end
 
   def self.file_type_attributes=(attributes_array)

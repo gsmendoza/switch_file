@@ -9,11 +9,19 @@ describe SwitchFile do
 
     it "should be the given config_path, if provided" do
       SwitchFile.config_path = 'spec/fixtures/project/.switch_file'
+      SwitchFile.config_path.should be_a(Pow::Base)
       SwitchFile.config_path.to_s.should =~ /spec\/fixtures\/project\/.switch_file/
     end
   end
 
-  describe "#file_type_attributes" do
+  describe ".config_path=" do
+    it "should set the stored config_path to nil, if value is nil" do
+      SwitchFile.config_path = nil
+      SwitchFile.instance_variable_get(:@config_path).should be_nil
+    end
+  end
+
+  describe ".file_type_attributes" do
     it "should be the set file_type_attributes, if available" do
       attribute_hash = {shortcut: :s}
       SwitchFile.file_type_attributes = [attribute_hash]

@@ -8,7 +8,7 @@ module SwitchFile
       :type => :string
 
     def execute(source_path)
-      SwitchFile.config_path = Pow(options['config'])
+      SwitchFile.config_path = options['config']
       sp = SourcePath.new(value: source_path)
       shortcut = FileTypeShortcut.new(value: options['shortcut'] ||  ask(sp.prompt))
       target_command = shortcut.file_type.generate_open_command(sp)
