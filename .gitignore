@@ -1,0 +1,11 @@
+*.gem
+*.ps
+git.bundle
+.geanyprj
+.rvmrc
+.yardoc
+Gemfile.lock
+doc/*
+files/*
+pkg/*
+tmp/*
