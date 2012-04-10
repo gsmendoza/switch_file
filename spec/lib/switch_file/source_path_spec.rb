@@ -19,4 +19,26 @@ describe SwitchFile::SourcePath do
       source_path.file_type.should == file_type
     end
   end
+
+  describe "#prompt_message" do
+    it "be the message to display if the user want to jump to file related to the source path" do
+      FileType.all = [
+        FileType.new(
+          name: :spec,
+          shortcut: :s,
+          open_command: lambda {|class_name| "geany spec/lib/#{class_name}_spec.rb"},
+          path_regex: %r{spec/lib/(.*)_spec.rb}
+        ),
+        FileType.new(
+          name: :lib,
+          shortcut: :l,
+          open_command: lambda {|class_name| "geany lib/#{class_name}.rb"},
+          path_regex: %r{lib/(.*).rb}
+        )
+      ]
+
+      source_path = SourcePath.new(value: '/home/user/project/lib/project/some_class.rb')
+      source_path.prompt_message.should == "Enter the shortcut of the file you want to open:\n\n[s] spec: geany spec/lib/project/some_class_spec.rb\n[l] lib: geany lib/project/some_class.rb\n\n"
+    end
+  end
 end

@@ -2,6 +2,7 @@ module SwitchFile
   # A type of file within the project
   class FileType < Valuable
     has_value :open_command
+    has_value :name
     has_value :path_regex
     has_value :shortcut
 
