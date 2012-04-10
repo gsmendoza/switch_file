@@ -23,7 +23,7 @@ describe SwitchFile do
 
   describe ".file_type_attributes" do
     it "should be the set file_type_attributes, if available" do
-      attribute_hash = {shortcut: :s}
+      attribute_hash = {:shortcut => :s}
       SwitchFile.file_type_attributes = [attribute_hash]
       SwitchFile.file_type_attributes.should == [attribute_hash]
     end
