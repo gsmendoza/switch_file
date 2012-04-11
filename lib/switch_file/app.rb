@@ -7,15 +7,10 @@ module SwitchFile
       :desc => "the shortcut of the file type you wish to open",
       :type => :string
 
-    method_option "config",
-      :aliases => "-c",
-      :desc => "configuration path of the project. PRESENT_WORKING_DIRECTORY/.switch_file by default.",
-      :type => :string
-
     def execute(source_path)
       sp = SourcePath.new(:value => source_path)
-      shortcut = FileTypeShortcut.new(:value => options['shortcut'] ||  ask(sp.prompt_message))
-      target_command = shortcut.file_type.generate_open_command(sp)
+      shortcut = options['shortcut'] || ask(sp.prompt_message)
+      target_command = sp.project.file_type_with_shortcut(shortcut).generate_open_command(sp)
       `#{target_command}`
     end
   end

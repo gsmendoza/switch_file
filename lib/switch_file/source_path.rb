@@ -19,15 +19,15 @@ module SwitchFile
     end
 
     def file_type
-      FileType.all.detect{|file_type| value =~ file_type.path_regex }
+      project.file_types.detect{|file_type| value =~ file_type.path_regex }
     end
 
-    def project_path
-      self.class.project_path(value)
+    def project
+      @project ||= Project.new(:path => self.class.project_path(value))
     end
 
     def prompt_message
-      file_type_options = FileType.all.map{|file_type|
+      file_type_options = project.file_types.map{|file_type|
         "[#{file_type.shortcut}] #{file_type.name}: #{file_type.path(self)}"
       }
 
