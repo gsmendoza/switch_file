@@ -26,19 +26,31 @@ describe SwitchFile::SourcePath do
         FileType.new(
           :name => :spec,
           :shortcut => :s,
-          :open_command => lambda {|class_name| "geany spec/lib/#{class_name}_spec.rb"},
-          :path_regex => %r{spec/lib/(.*)_spec.rb}
+          :path_generator => lambda {|class_name| "spec/lib/#{class_name}_spec.rb"},
+          :path_regex => %r{spec/lib/(.*)_spec.rb},
+          :command => 'geany'
         ),
         FileType.new(
           :name => :lib,
           :shortcut => :l,
-          :open_command => lambda {|class_name| "geany lib/#{class_name}.rb"},
-          :path_regex => %r{lib/(.*).rb}
+          :path_generator => lambda {|class_name| "lib/#{class_name}.rb"},
+          :path_regex => %r{lib/(.*).rb},
+          :command => 'geany'
         )
       ]
 
-      source_path = SourcePath.new(:value => '/home/user/project/lib/project/some_class.rb')
-      source_path.prompt_message.should == "Enter the shortcut of the file you want to open:\n\n[s] spec: geany spec/lib/project/some_class_spec.rb\n[l] lib: geany lib/project/some_class.rb\n\n"
+      source_path = SourcePath.new(:value => Pow('spec/fixtures/project/lib/some_class.rb').to_s)
+      source_path.prompt_message.should == "Enter the shortcut of the file you want to open:\n\n[s] spec: spec/lib/some_class_spec.rb\n[l] lib: lib/some_class.rb\n\n"
+    end
+  end
+
+  describe ".project_path" do
+    it "should be the ancestor of path that has a .switch_file file" do
+      SourcePath.project_path(Pow('spec/fixtures/project/lib/some_class.rb').to_s).should == Pow('spec/fixtures/project').to_s
+    end
+
+    it "should raise an error if the path does not have a project_path" do
+      lambda { SourcePath.project_path(Pow('/').to_s) }.should raise_error(SourcePath::CannotFindProjectPath)
     end
   end
 end
