@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SwitchFile::FileType do
   describe "#generate_open_command" do
-    it "should return the command for opening the desired file type of the source_path" do
+    it "should return the command for opening the desired file type of the source" do
       spec_file_type = FileType.new(
         :path_generator => lambda{|class_name| "spec/lib/#{class_name}_spec.rb" },
         :command => 'geany'
@@ -12,16 +12,16 @@ describe SwitchFile::FileType do
         :path_regex => %r{lib/(.*).rb$}
       )
 
-      source_path = Source.new(:path => Pow('spec/fixtures/project/lib/some_class.rb').to_s)
-      source_path.project.should_receive(:file_types).and_return([lib_file_type, spec_file_type])
+      source = Source.new(:path => Pow('spec/fixtures/project/lib/some_class.rb').to_s)
+      source.project.should_receive(:file_types).and_return([lib_file_type, spec_file_type])
 
-      command = spec_file_type.generate_open_command(source_path)
+      command = spec_file_type.generate_open_command(source)
       command.should == "geany #{Pow('spec/fixtures/project/spec/lib/some_class_spec.rb').to_s}"
     end
   end
 
   describe "#path" do
-    it "should be the path of the matching file type of source_path" do
+    it "should be the path of the matching file type of source" do
       spec_file_type = FileType.new(
         :path_generator => lambda{|class_name| "spec/lib/#{class_name}_spec.rb" },
         :command => 'geany'

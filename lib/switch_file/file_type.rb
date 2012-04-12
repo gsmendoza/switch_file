@@ -7,13 +7,13 @@ module SwitchFile
     has_value :path_regex
     has_value :shortcut
 
-    def generate_open_command(source_path)
-      "#{command} #{source_path.project.path}/#{relative_path(source_path)}"
+    def generate_open_command(source)
+      "#{command} #{source.project.path}/#{relative_path(source)}"
     end
 
-    # Path of matching file to source_path, relative to source_path's project
-    def relative_path(source_path)
-      path_generator.call(source_path.class_name)
+    # Path of matching file to source, relative to source's project
+    def relative_path(source)
+      path_generator.call(source.class_name)
     end
   end
 end

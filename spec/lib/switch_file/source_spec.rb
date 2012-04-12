@@ -3,9 +3,9 @@ require 'spec_helper'
 describe SwitchFile::Source do
   describe "#class_name" do
     it "should be the part of the value that is the class name of the source path" do
-      source_path = Source.new(:path => 'spec/fixtures/project/lib/project/some_class.rb')
-      source_path.project.should_receive(:file_types).and_return([FileType.new(:path_regex => %r{lib/(.*).rb$})])
-      source_path.class_name.should == 'project/some_class'
+      source = Source.new(:path => 'spec/fixtures/project/lib/project/some_class.rb')
+      source.project.should_receive(:file_types).and_return([FileType.new(:path_regex => %r{lib/(.*).rb$})])
+      source.class_name.should == 'project/some_class'
     end
   end
 
@@ -13,9 +13,9 @@ describe SwitchFile::Source do
     it "should be the file type that matches the source path" do
       file_type = FileType.new(:path_regex => %r{lib/(.*).rb$})
 
-      source_path = Source.new(:path => 'spec/fixtures/project/lib/some_class.rb')
-      source_path.project.should_receive(:file_types).and_return([file_type])
-      source_path.file_type.should == file_type
+      source = Source.new(:path => 'spec/fixtures/project/lib/some_class.rb')
+      source.project.should_receive(:file_types).and_return([file_type])
+      source.file_type.should == file_type
     end
   end
 
@@ -38,9 +38,9 @@ describe SwitchFile::Source do
         )
       ]
 
-      source_path = Source.new(:path => Pow('spec/fixtures/project/lib/some_class.rb').to_s)
-      source_path.project.stub(:file_types).and_return(file_types)
-      source_path.prompt_message.should == "Enter the shortcut of the file you want to open:\n\n[s] spec: spec/lib/some_class_spec.rb\n[l] lib: lib/some_class.rb\n\n"
+      source = Source.new(:path => Pow('spec/fixtures/project/lib/some_class.rb').to_s)
+      source.project.stub(:file_types).and_return(file_types)
+      source.prompt_message.should == "Enter the shortcut of the file you want to open:\n\n[s] spec: spec/lib/some_class_spec.rb\n[l] lib: lib/some_class.rb\n\n"
     end
   end
 
@@ -55,10 +55,10 @@ describe SwitchFile::Source do
   end
 
   describe "project" do
-    it "should be the project which owns this source_path" do
-      source_path = Source.new(:path => 'spec/fixtures/project/lib/some_class.rb')
-      source_path.project.should be_a(Project)
-      source_path.project.path.should == Pow('spec/fixtures/project').to_s
+    it "should be the project which owns this source" do
+      source = Source.new(:path => 'spec/fixtures/project/lib/some_class.rb')
+      source.project.should be_a(Project)
+      source.project.path.should == Pow('spec/fixtures/project').to_s
     end
   end
 end
