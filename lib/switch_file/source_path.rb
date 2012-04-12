@@ -28,7 +28,7 @@ module SwitchFile
 
     def prompt_message
       file_type_options = project.file_types.map{|file_type|
-        "[#{file_type.shortcut}] #{file_type.name}: #{file_type.path(self)}"
+        "[#{file_type.shortcut}] #{file_type.name}: #{file_type.relative_path(self)}"
       }
 
       "Enter the shortcut of the file you want to open:\n\n#{file_type_options.join("\n")}\n\n"

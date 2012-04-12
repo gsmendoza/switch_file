@@ -8,11 +8,11 @@ module SwitchFile
     has_value :shortcut
 
     def generate_open_command(source_path)
-      "#{command} #{source_path.project.path}/#{path(source_path)}"
+      "#{command} #{source_path.project.path}/#{relative_path(source_path)}"
     end
 
     # Path of matching file to source_path, relative to source_path's project
-    def path(source_path)
+    def relative_path(source_path)
       path_generator.call(source_path.class_name)
     end
   end

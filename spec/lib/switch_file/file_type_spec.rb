@@ -27,7 +27,7 @@ describe SwitchFile::FileType do
         :command => 'geany'
       )
 
-      path = spec_file_type.path(SourcePath.new(:value => Pow('spec/fixtures/project/lib/some_class.rb').to_s))
+      path = spec_file_type.relative_path(SourcePath.new(:value => Pow('spec/fixtures/project/lib/some_class.rb').to_s))
       path.should == "spec/lib/some_class_spec.rb"
     end
   end
