@@ -8,7 +8,7 @@ module SwitchFile
       :type => :string
 
     def execute(source_path)
-      sp = SourcePath.new(:value => source_path)
+      sp = Source.new(:value => source_path)
       shortcut = options['shortcut'] || ask(sp.prompt_message)
       target_command = sp.project.file_type_with_shortcut(shortcut).generate_open_command(sp)
       `#{target_command}`

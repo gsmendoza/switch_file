@@ -1,6 +1,6 @@
 module SwitchFile
-  # Path to a source file
-  class SourcePath < Valuable
+  # A source file
+  class Source < Valuable
     has_value :value
 
     def self.project_path(path)
