@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SwitchFile::Source do
   describe "#class_name" do
     it "should be the part of the value that is the class name of the source path" do
-      source_path = Source.new(:value => 'spec/fixtures/project/lib/project/some_class.rb')
+      source_path = Source.new(:path => 'spec/fixtures/project/lib/project/some_class.rb')
       source_path.project.should_receive(:file_types).and_return([FileType.new(:path_regex => %r{lib/(.*).rb$})])
       source_path.class_name.should == 'project/some_class'
     end
@@ -13,7 +13,7 @@ describe SwitchFile::Source do
     it "should be the file type that matches the source path" do
       file_type = FileType.new(:path_regex => %r{lib/(.*).rb$})
 
-      source_path = Source.new(:value => 'spec/fixtures/project/lib/some_class.rb')
+      source_path = Source.new(:path => 'spec/fixtures/project/lib/some_class.rb')
       source_path.project.should_receive(:file_types).and_return([file_type])
       source_path.file_type.should == file_type
     end
@@ -38,7 +38,7 @@ describe SwitchFile::Source do
         )
       ]
 
-      source_path = Source.new(:value => Pow('spec/fixtures/project/lib/some_class.rb').to_s)
+      source_path = Source.new(:path => Pow('spec/fixtures/project/lib/some_class.rb').to_s)
       source_path.project.stub(:file_types).and_return(file_types)
       source_path.prompt_message.should == "Enter the shortcut of the file you want to open:\n\n[s] spec: spec/lib/some_class_spec.rb\n[l] lib: lib/some_class.rb\n\n"
     end
@@ -56,7 +56,7 @@ describe SwitchFile::Source do
 
   describe "project" do
     it "should be the project which owns this source_path" do
-      source_path = Source.new(:value => 'spec/fixtures/project/lib/some_class.rb')
+      source_path = Source.new(:path => 'spec/fixtures/project/lib/some_class.rb')
       source_path.project.should be_a(Project)
       source_path.project.path.should == Pow('spec/fixtures/project').to_s
     end

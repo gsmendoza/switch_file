@@ -12,7 +12,7 @@ describe SwitchFile::FileType do
         :path_regex => %r{lib/(.*).rb$}
       )
 
-      source_path = Source.new(:value => Pow('spec/fixtures/project/lib/some_class.rb').to_s)
+      source_path = Source.new(:path => Pow('spec/fixtures/project/lib/some_class.rb').to_s)
       source_path.project.should_receive(:file_types).and_return([lib_file_type, spec_file_type])
 
       command = spec_file_type.generate_open_command(source_path)
@@ -27,7 +27,7 @@ describe SwitchFile::FileType do
         :command => 'geany'
       )
 
-      path = spec_file_type.relative_path(Source.new(:value => Pow('spec/fixtures/project/lib/some_class.rb').to_s))
+      path = spec_file_type.relative_path(Source.new(:path => Pow('spec/fixtures/project/lib/some_class.rb').to_s))
       path.should == "spec/lib/some_class_spec.rb"
     end
   end

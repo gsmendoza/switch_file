@@ -1,7 +1,7 @@
 module SwitchFile
   # A source file
   class Source < Valuable
-    has_value :value
+    has_value :path
 
     def self.project_path(path)
       parent = Pow(path).parent
@@ -15,15 +15,15 @@ module SwitchFile
     end
 
     def class_name
-      value.match(file_type.path_regex)[1]
+      path.match(file_type.path_regex)[1]
     end
 
     def file_type
-      project.file_types.detect{|file_type| value =~ file_type.path_regex }
+      project.file_types.detect{|file_type| path =~ file_type.path_regex }
     end
 
     def project
-      @project ||= Project.new(:path => self.class.project_path(value))
+      @project ||= Project.new(:path => self.class.project_path(path))
     end
 
     def prompt_message
