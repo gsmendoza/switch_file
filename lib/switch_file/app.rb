@@ -2,7 +2,7 @@ module SwitchFile
   class App < Thor
     default_task :execute
 
-    desc "execute [OPTIONS]...", "Switch to the matching file type of PATH."
+    desc "[execute] [OPTIONS]...", "Switch to the matching file type of PATH."
 
     method_option "shortcut",
       :aliases => "-s",
