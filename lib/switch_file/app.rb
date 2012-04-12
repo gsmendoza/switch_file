@@ -21,6 +21,11 @@ module SwitchFile
       target_command = source.project.file_type_with_shortcut(shortcut).generate_open_command(source)
       `#{target_command}`
     end
+
+    def help
+      say "switch_file #{VERSION}"
+      super
+    end
   end
 end
 
