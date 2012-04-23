@@ -26,14 +26,14 @@ module SwitchFile
             `#{target_command}`
           rescue SwitchFile::Exception => exception
             if SwitchFile.production?
-              say "#{exception.class.to_s.demodulize.underscore.humanize}: #{exception.message}"
+              say exception.message
               retry
             end
           end
         end
 
       rescue SwitchFile::Exception => exception
-        say "#{exception.class.to_s.demodulize.underscore.humanize}: #{exception.message}" if SwitchFile.production?
+        say exception.message if SwitchFile.production?
       end
     end
 
