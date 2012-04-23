@@ -18,8 +18,11 @@ module SwitchFile
     def execute
       source = Source.new(:path => options['path'])
       shortcut = options['shortcut'] || ask(source.prompt_message)
-      target_command = source.project.file_type_with_shortcut(shortcut).generate_open_command(source)
-      `#{target_command}`
+
+      unless shortcut.strip.empty?
+        target_command = source.project.file_type_with_shortcut(shortcut).generate_open_command(source)
+        `#{target_command}`
+      end
     end
 
     def help
