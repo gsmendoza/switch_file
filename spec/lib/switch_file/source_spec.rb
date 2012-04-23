@@ -9,13 +9,13 @@ describe SwitchFile::Source do
     end
   end
 
-  describe "#file_type" do
+  describe "#file_type!" do
     it "should be the file type that matches the source path" do
       file_type = FileType.new(:path_regex => %r{lib/(.*).rb$})
 
       source = Source.new(:path => 'spec/fixtures/project/lib/some_class.rb')
       source.project.should_receive(:file_types).and_return([file_type])
-      source.file_type.should == file_type
+      source.file_type!.should == file_type
     end
   end
 

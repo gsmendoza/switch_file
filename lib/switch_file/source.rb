@@ -15,11 +15,13 @@ module SwitchFile
     end
 
     def class_name
-      path.match(file_type.path_regex)[1]
+      path.match(file_type!.path_regex)[1]
     end
 
-    def file_type
-      project.file_types.detect{|file_type| path =~ file_type.path_regex }
+    def file_type!
+      project.file_types.detect{|file_type| path =~ file_type.path_regex }.tap do |result|
+        raise NoMatchingFileTypeForPath.new(path) if result.nil?
+      end
     end
 
     def project
@@ -35,6 +37,9 @@ module SwitchFile
     end
 
     class CannotFindProjectPath < SwitchFile::Exception
+    end
+
+    class NoMatchingFileTypeForPath < SwitchFile::Exception
     end
   end
 end
