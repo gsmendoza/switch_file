@@ -1,21 +1,21 @@
 require 'spec_helper'
 
 describe SwitchFile::Project do
-  describe "#file_type_with_shortcut" do
+  describe "#file_type_with_shortcut!" do
     it "should be the file_type with the same name as the shortcut" do
       file_type = FileType.new(:shortcut => :s)
       project = Project.new
       project.should_receive(:file_types).and_return([file_type])
 
-      project.file_type_with_shortcut(:s).shortcut.should == :s
+      project.file_type_with_shortcut!(:s).shortcut.should == :s
     end
 
-    it "should be nil if there is no matching file type" do
+    it "should raise an error if there is no matching file type" do
       file_type = FileType.new(:shortcut => :r)
       project = Project.new
       project.should_receive(:file_types).and_return([file_type])
 
-      project.file_type_with_shortcut(:s).should be_nil
+      lambda { project.file_type_with_shortcut!(:s) }.should raise_error(Project::NoMatchingFileTypeForShortcut)
     end
   end
 

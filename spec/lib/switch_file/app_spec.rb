@@ -13,5 +13,11 @@ describe SwitchFile::App do
       app.invoke :execute, [], "path" => "spec/fixtures/project/lib/some_class.rb", "shortcut" => "\n"
       (test_tmp_dir / 'result.txt').should_not exist
     end
+
+    it "should not fail if the shortcut is invalid" do
+      app = described_class.new
+      app.invoke :execute, [], "path" => "spec/fixtures/project/lib/some_class.rb", "shortcut" => "z"
+      (test_tmp_dir / 'result.txt').should_not exist
+    end
   end
 end

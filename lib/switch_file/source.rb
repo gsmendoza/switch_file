@@ -34,7 +34,7 @@ module SwitchFile
       "Enter the shortcut of the file you want to open:\n\n#{file_type_options.join("\n")}\n\n"
     end
 
-    class CannotFindProjectPath < Exception
+    class CannotFindProjectPath < SwitchFile::Exception
     end
   end
 end
