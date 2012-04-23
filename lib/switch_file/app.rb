@@ -27,8 +27,10 @@ module SwitchFile
         end
 
       rescue SwitchFile::Exception => exception
-        say "#{exception.class.to_s.demodulize.underscore.humanize}: #{exception.message}"
-        retry unless options['shortcut']
+        if SwitchFile.production?
+          say "#{exception.class.to_s.demodulize.underscore.humanize}: #{exception.message}"
+          retry
+        end
       end
     end
 
