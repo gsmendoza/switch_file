@@ -1,0 +1,17 @@
+[
+  {
+    :name => 'spec',
+    :shortcut => :s,
+    :path_generator => lambda {|class_name| "spec/lib/#{class_name}_spec.rb"},
+    :path_regex => %r{spec/lib/(.*)_spec.rb},
+    :command => 'geany'
+  },
+
+  {
+    :name => 'lib',
+    :shortcut => :l,
+    :path_generator => lambda {|class_name| "lib/#{class_name}.rb"},
+    :path_regex => %r{lib/(.*).rb},
+    :command => 'geany'
+  }
+]
