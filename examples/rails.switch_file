@@ -2,22 +2,22 @@
   {
     :name => 'model_spec',
     :shortcut => :ms,
-    :path_generator => lambda {|class_name| "spec/models/#{class_name}_spec.rb"},
+    :path_generator => lambda {|class_name| "spec/models/#{class_name.singularize}_spec.rb"},
     :path_regex => %r{spec/models/(.*)_spec.rb},
     :command => 'geany'
   },
   {
     :name => 'controller_spec',
     :shortcut => :cs,
-    :path_generator => lambda {|class_name| "spec/controllers/#{class_name}_spec.rb"},
-    :path_regex => %r{spec/controllers/(.*)_spec.rb},
+    :path_generator => lambda {|class_name| "spec/controllers/#{class_name.pluralize}_controller_spec.rb"},
+    :path_regex => %r{spec/controllers/(.*)_controller_spec.rb},
     :command => 'geany'
   },
   {
     :name => 'helper_spec',
     :shortcut => :hs,
-    :path_generator => lambda {|class_name| "spec/helpers/#{class_name}_spec.rb"},
-    :path_regex => %r{spec/helpers/(.*)_spec.rb},
+    :path_generator => lambda {|class_name| "spec/helpers/#{class_name.pluralize}_helper_spec.rb"},
+    :path_regex => %r{spec/helpers/(.*)_helper_spec.rb},
     :command => 'geany'
   },
   {
@@ -30,22 +30,22 @@
   {
     :name => 'model',
     :shortcut => :m,
-    :path_generator => lambda {|class_name| "app/models/#{class_name}.rb"},
+    :path_generator => lambda {|class_name| "app/models/#{class_name.singularize}.rb"},
     :path_regex => %r{app/models/(.*).rb},
     :command => 'geany'
   },
   {
     :name => 'controller',
     :shortcut => :c,
-    :path_generator => lambda {|class_name| "app/controllers/#{class_name}.rb"},
-    :path_regex => %r{app/controllers/(.*).rb},
+    :path_generator => lambda {|class_name| "app/controllers/#{class_name.pluralize}_controller.rb"},
+    :path_regex => %r{app/controllers/(.*)_controller.rb},
     :command => 'geany'
   },
   {
     :name => 'helper',
     :shortcut => :h,
-    :path_generator => lambda {|class_name| "app/helpers/#{class_name}.rb"},
-    :path_regex => %r{app/helpers/(.*).rb},
+    :path_generator => lambda {|class_name| "app/helpers/#{class_name.pluralize}_helper.rb"},
+    :path_regex => %r{app/helpers/(.*)_helper.rb},
     :command => 'geany'
   },
   {
