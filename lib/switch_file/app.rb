@@ -20,21 +20,21 @@ module SwitchFile
 
       begin
         shortcut = options['shortcut'] || ask(source.prompt_message)
+
         unless shortcut.strip.empty?
-          begin
-            target_command = source.project.file_type_with_shortcut!(shortcut).generate_open_command(source)
-            `#{target_command}`
-          rescue SwitchFile::Exception => exception
-            if SwitchFile.production?
-              say exception.message
-              retry
-            end
-          end
+          target_command = source.project.file_type_with_shortcut!(shortcut).generate_open_command(source)
+          `#{target_command}`
         end
 
-      rescue SwitchFile::Exception => exception
-        say exception.message if SwitchFile.production?
+      rescue Project::NoMatchingFileTypeForShortcut => exception
+        if SwitchFile.production?
+          say exception.message
+          retry
+        end
       end
+
+    rescue SwitchFile::Exception => exception
+      say exception.message if SwitchFile.production?
     end
 
     def help
